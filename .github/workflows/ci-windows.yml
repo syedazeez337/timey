@@ -1,0 +1,43 @@
+name: ci-windows
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: windows-latest
+    env:
+      VCPKG_ROOT: ${{ github.workspace }}\vcpkg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup MSVC devcmd
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Cache vcpkg installed
+        uses: actions/cache@v4
+        with:
+          path: |
+            vcpkg/installed
+            ~/.cache/vcpkg/archives
+          key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json') }}-${{ hashFiles('vcpkg/**/ports/**', 'vcpkg/**/versions/**') }}
+
+      - name: Configure (Debug)
+        run: cmake --preset windows-debug
+
+      - name: Build (Debug)
+        run: cmake --build --preset build-debug --parallel
+
+      - name: Test (Debug)
+        run: ctest --test-dir build/windows-debug -C Debug --output-on-failure
+
+      - name: Configure (Release)
+        run: cmake --preset windows-release
+
+      - name: Build (Release)
+        run: cmake --build --preset build-release --parallel
