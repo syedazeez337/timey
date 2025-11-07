@@ -42,3 +42,34 @@
 
 /build/
 
+
+# tzdb sources (do not commit)
+assets/zoneinfo/africa
+assets/zoneinfo/antarctica
+assets/zoneinfo/asia
+assets/zoneinfo/australasia
+assets/zoneinfo/backward
+assets/zoneinfo/etcetera
+assets/zoneinfo/europe
+assets/zoneinfo/northamerica
+assets/zoneinfo/southamerica
+assets/zoneinfo/backzone
+assets/zoneinfo/factory
+assets/zoneinfo/zone*.tab
+assets/zoneinfo/NEWS
+assets/zoneinfo/Makefile
+assets/zoneinfo/*.awk
+assets/zoneinfo/*.html
+assets/zoneinfo/*.tab
+assets/zoneinfo/*.txt
+assets/zoneinfo/tzdata.tar.gz
+assets/zoneinfo/main.zi
+assets/zoneinfo/CONTRIBUTING
+assets/zoneinfo/SECURITY
+assets/zoneinfo/LICENSE
+
+# We DO commit these tzdb artifacts:
+#!assets/zoneinfo/tzdata.zi
+#!assets/zoneinfo/version
+#!assets/zoneinfo/leap-seconds.list
+#!assets/zoneinfo/windowsZones.xml
